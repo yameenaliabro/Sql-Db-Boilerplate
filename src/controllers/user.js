@@ -1,4 +1,4 @@
-import { createUserModel, getUserByIdModel, getUsersModel } from "../models/user.js"
+import { createUserModel, deleteUserModel, getUserByIdModel, getUsersModel } from "../models/user.js"
 
 export const createUser = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
@@ -24,6 +24,16 @@ export const getUserById = async (req, res) => {
     try {
         const response = await getUserByIdModel(id)
         res.send({ message: "get User by Id Sucessfully", data: response })
+    } catch (error) {
+        res.send({ message: "Server Error", error: error.message })
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    const { id } = req.params
+    try {
+        const response = await deleteUserModel(id);
+        res.send({ message: "Delete user by Id Sucessfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
     }

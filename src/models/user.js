@@ -1,5 +1,5 @@
 import pool from "../db/index.js";
-import { createUserqury, getAllUsersQuery, getUserByIdQuery } from "../queries/user.js";
+import { createUserqury, deleteUserQuery, getAllUsersQuery, getUserByIdQuery } from "../queries/user.js";
 
 export const createUserModel = async (user) => {
     const { firstName, lastName, password, email } = user;
@@ -28,6 +28,15 @@ export const getUsersModel = async () => {
 export const getUserByIdModel = async (id) => {
     try {
         const response = await pool.query(getUserByIdQuery, [id])
+        return response.rows[0]
+    } catch (error) {
+        throw error
+    }
+}
+
+export const deleteUserModel = async (id) => {
+    try {
+        const response = await pool.query(deleteUserQuery, [id])
         return response.rows[0]
     } catch (error) {
         throw error
