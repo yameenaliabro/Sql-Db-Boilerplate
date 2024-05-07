@@ -8,7 +8,7 @@ dotenv.config();
 export const createUser = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
     try {
-        const response = await createUserModel(req.body)
+        const response = await createUserModel({ firstName, lastName, password, email })
         res.send({ message: "User Created Sucessfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
@@ -17,7 +17,6 @@ export const createUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
-    console.log("🚀 ~ loginUser ~ password:", password)
     console.log("🚀 ~ loginUser ~ email:", email)
     try {
         const response = await loginUserModel(email);

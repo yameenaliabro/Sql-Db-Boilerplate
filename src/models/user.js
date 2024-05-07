@@ -9,8 +9,8 @@ export const createUserModel = async (user) => {
         const response = await pool.query(createUserqury, [
             firstName,
             lastName,
+            email,
             hashedPassword,
-            email
         ])
         return response.rows[0];
     } catch (error) {
