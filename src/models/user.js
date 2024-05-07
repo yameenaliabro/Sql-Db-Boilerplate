@@ -18,6 +18,15 @@ export const createUserModel = async (user) => {
     }
 }
 
+export const loginUserModel = async (email) => {
+    try {
+        const response = await pool.query("SELECT * FROM  users WHERE email = $1", [email]);
+        return response.rows;
+    } catch (error) {
+        throw error
+    }
+}
+
 export const getUsersModel = async () => {
     try {
         const response = await pool.query(getAllUsersQuery)

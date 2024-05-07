@@ -6,10 +6,12 @@ import {
     deleteUser,
     getUserById,
     getUsers,
+    loginUser,
     updateUser
 } from "../controllers/user.js";
 
-userroutes.post("/create", createUser);
+userroutes.post("/register", createUser);
+userroutes.post("/login", loginUser);
 userroutes.get("/getall", getUsers)
 userroutes.get("/get/:id", getUserById)
 userroutes.delete("/delete/:id", deleteUser)
