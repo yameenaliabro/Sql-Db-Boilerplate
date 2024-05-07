@@ -2,4 +2,8 @@ export const createUserqury = "INSERT INTO users (firstName,lastName,email,passw
 export const getAllUsersQuery = "SELECT * FROM users";
 export const getUserByIdQuery = "SELECT * FROM users  WHERE id = $1";
 export const deleteUserQuery = "DELETE FROM users WHERE id = $1 RETURNING *"
-export const updateQuery = "UPDATE users SET firstName = $1, lastName = $2, email = $3, password = $4 WHERE id = $5  RETURNING *"
+export const createUpdateQuery = (setClause, index) => {
+    return `UPDATE users SET ${setClause.join(', ')} WHERE id = $${index} RETURNING *`;
+};
+
+

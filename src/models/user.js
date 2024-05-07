@@ -1,5 +1,5 @@
 import pool from "../db/index.js";
-import { createUserqury, deleteUserQuery, getAllUsersQuery, getUserByIdQuery, updateQuery } from "../queries/user.js";
+import { createUpdateQuery, createUserqury, deleteUserQuery, getAllUsersQuery, getUserByIdQuery } from "../queries/user.js";
 
 export const createUserModel = async (user) => {
     const { firstName, lastName, password, email } = user;
@@ -69,10 +69,8 @@ export const updateUserModel = async (id, updates) => {
     }
     // Add the ID to the values array
     values.push(id);
-
-    const updateQuery = `UPDATE users SET ${setClause.join(', ')} WHERE id = $${index} RETURNING *`;
-
     try {
+        const updateQuery = createUpdateQuery(setClause,index); 
         const response = await pool.query(updateQuery, values);
         return response.rows[0];
     } catch (error) {

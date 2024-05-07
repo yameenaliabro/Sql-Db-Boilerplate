@@ -45,7 +45,6 @@ export const updateUser = async (req, res) => {
     const updates = req.body;
     try {
         const response = await updateUserModel(id, updates)
-        console.log("🚀 ~ updateUser ~ response:", response)
         res.send({ message: "user updates sucessfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
