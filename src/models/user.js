@@ -1,13 +1,15 @@
 import pool from "../db/index.js";
+import bcrypt from "bcrypt";
 import { createUpdateQuery, createUserqury, deleteUserQuery, getAllUsersQuery, getUserByIdQuery } from "../queries/user.js";
 
 export const createUserModel = async (user) => {
     const { firstName, lastName, password, email } = user;
+    const hashedPassword = await bcrypt.hash(password, 10);
     try {
         const response = await pool.query(createUserqury, [
             firstName,
             lastName,
-            password,
+            hashedPassword,
             email
         ])
         return response.rows[0];
@@ -70,7 +72,7 @@ export const updateUserModel = async (id, updates) => {
     // Add the ID to the values array
     values.push(id);
     try {
-        const updateQuery = createUpdateQuery(setClause,index); 
+        const updateQuery = createUpdateQuery(setClause, index);
         const response = await pool.query(updateQuery, values);
         return response.rows[0];
     } catch (error) {
