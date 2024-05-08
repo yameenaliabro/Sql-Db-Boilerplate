@@ -6,7 +6,8 @@ dotenv.config();
 const PORT = process.env.PORT;
 
 const app = express();
-app.use(bodyParser({ extended: false }))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use("/user", userroutes);
 

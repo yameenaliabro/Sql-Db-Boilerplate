@@ -18,6 +18,7 @@ export const verifyToken = (req, res, next) => {
     try {
         // Verify the token
         const decoded = jwt.verify(tokenValue, process.env.JWT_SECRET_KEY);
+        console.log("🚀 ~ verifyToken ~ decoded:", decoded)
         // Attach the decoded user information to the request object
         req.user = decoded;
         next(); // Call the next middleware or route handler
