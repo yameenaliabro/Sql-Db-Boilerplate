@@ -9,7 +9,7 @@ export const createUser = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
     try {
         const response = await createUserModel({ firstName, lastName, password, email })
-        res.send({ message: "User Created Sucessfully", data: response })
+        res.send({ message: "User Created successfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
     }
@@ -25,7 +25,7 @@ export const loginUser = async (req, res) => {
             const passwordCheck = await bcrypt.compare(password, response[0].password)
             if (passwordCheck) {
                 const token = jwt.sign({ id: response[0].id, email: response[0].email }, process.env.JWT_SECRET_KEY)
-                res.send({ message: "Login Sucessfully", data: response, token: token })
+                res.send({ message: "Login Successfully", data: response, token: token })
             } else {
                 res.send({ message: "Password is incorrect" })
             }
@@ -40,7 +40,7 @@ export const loginUser = async (req, res) => {
 export const getUsers = async (req, res) => {
     try {
         const response = await getUsersModel();
-        res.send({ message: "get Users Sucessfully", data: response })
+        res.send({ message: "get Users Successfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
     }
@@ -50,7 +50,7 @@ export const getUserById = async (req, res) => {
     const { id } = req.params
     try {
         const response = await getUserByIdModel(id)
-        res.send({ message: "get User by Id Sucessfully", data: response })
+        res.send({ message: "get User by Id Successfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
     }
@@ -60,7 +60,7 @@ export const deleteUser = async (req, res) => {
     const { id } = req.params
     try {
         const response = await deleteUserModel(id);
-        res.send({ message: "Delete user by Id Sucessfully", data: response })
+        res.send({ message: "Delete user by Id Successfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
     }
@@ -72,7 +72,7 @@ export const updateUser = async (req, res) => {
     const updates = req.body;
     try {
         const response = await updateUserModel(id, updates)
-        res.send({ message: "user updates sucessfully", data: response })
+        res.send({ message: "user updates successfully", data: response })
     } catch (error) {
         res.send({ message: "Server Error", error: error.message })
     }
